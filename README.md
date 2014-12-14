@@ -46,6 +46,6 @@ For the complete unicode symbols, please see the `unicode-input.el` file.
 
 The following is a screenshot of `unicode-input` with `company-ghc` mode:
 
-![unicode input with company-ghc mode](./input-with-company-ghc.png)
+![unicode input with company-ghc mode](raw/default/input-with-company-ghc.png)
 
 
