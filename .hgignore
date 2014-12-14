@@ -1,0 +1,11 @@
+syntax: glob
+*~
+*.beam
+*.hi
+*.hp
+*.o
+*.aux
+*.ps
+*.prof
+*.elc
+
