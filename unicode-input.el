@@ -62,7 +62,7 @@
 ;; (add-hook 'haskell-mode-hook
 ;; 	  (lambda ()
 ;; 	    (abbrev-mode 1)
-;; 	    (enable-unicode-input "<f9>")))
+;; 	    (unicode-input-mode 1)))
 
 ;;; Usage:
 ;;
@@ -75,7 +75,10 @@
 
 ;;; Code:
 
-(defvar greek-letters
+(defvar unicode-input-prefix "<f9>"
+  "Default keymap prefix.")
+
+(defvar *unicode-input-greek-letters*
   '(("alpha"		"α")
     ("Alpha"		"Α")
     ("beta"		"β")
@@ -142,9 +145,9 @@
     ("Sho"		"Ϸ")))
 
 (define-abbrev-table 'global-abbrev-table
-  greek-letters)
+  *unicode-input-greek-letters*)
 
-(defvar unicode-character-haskell
+(defvar *unicode-input-haskell-characters*
   '(("A"		"𝔸")
     ("B"		"𝔹")
     ("C"		"ℂ")
@@ -213,7 +216,7 @@
     ))
 
 
-(defvar unicode-subscript
+(defvar *unicode-input-subscript*
   '(("_0"	"₀")
     ("_1"	"₁")
     ("_2"	"₂")
@@ -242,7 +245,7 @@
     ("_s"	"ₛ")
     ("_t"	"ₜ")))
 
-(defvar unicode-superscript
+(defvar *unicode-input-superscript*
   '(("^0"	"⁰")
     ("^1"	"¹")
     ("^2"	"²")
@@ -262,19 +265,34 @@
     ("^n"	"ⁿ")))
 
 
-(defun enable-unicode-input (prefix-key)
-  (let ((uprefix (concat prefix-key " ")))
-    (progn
-      (dolist (x unicode-character-haskell)
-	(local-set-key (kbd (concat uprefix (car x))) (cadr x)))
-      (dolist (x unicode-subscript)
-	(local-set-key (kbd (concat uprefix (car x))) (cadr x)))
-      (dolist (x unicode-superscript)
-	(local-set-key (kbd (concat uprefix (car x))) (cadr x))))))
+(define-minor-mode unicode-input-mode
+  "For unicode characters input. "
+  nil
+  :keymap (let ((map (make-keymap))
+		(uprefix "<f9> "))
+	    (progn
+	      (dolist (x *unicode-input-haskell-characters*)
+		(define-key map (kbd (concat unicode-input-prefix (car x)))
+		  (cadr x)))
+	      (dolist (x *unicode-input-subscript*)
+		(define-key map (kbd (concat unicode-input-prefix (car x)))
+		  (cadr x)))
+	      (dolist (x *unicode-input-superscript*)
+		(define-key map (kbd (concat unicode-input-prefix (car x)))
+		  (cadr x))))
+	    map))
+
+;;;###autoload
+(defun unicode-input-mode-enable ()
+  (unicode-input-mode 1))
+
+;;;###autoload
+(defun unicode-input-mode-disable ()
+  (unicode-input-mode 0))
+
 
 
 (provide 'unicode-input)
 
 ;;; unicode-input.el ends here
-
 
