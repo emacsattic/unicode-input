@@ -266,6 +266,7 @@
     ("^n"	"ⁿ")))
 
 
+;;;###autoload
 (define-minor-mode unicode-input-mode
   "For unicode characters input. "
   nil
