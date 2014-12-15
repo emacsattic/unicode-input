@@ -1,6 +1,6 @@
 ;;; unicode-input.el --- Support for unicode character input
 ;;
-;; Copyright(C) 2014 m00nlight
+;; Copyright(C) 2014-2015 m00nlight
 ;;
 ;; This file is NOT part of GNU Emacs.
 ;;
@@ -8,7 +8,7 @@
 ;; Maintainer: m00nlight <dot_wangyushi@yeah.net>
 ;; Created: 13 Dec 2014
 ;; Keywords: unicode, input,
-;; Bitbucket:
+;; Bitbucket: https://bitbucket.org/m00nlight/unicode-input/
 
 ;; This program is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -47,15 +47,16 @@
 ;; see the instruction <https://github.com/haskell/haskell-mode>. Notice not
 ;; to enable the "haskell-unicode-input-method".
 ;;
-;; 2. Place haskell-unicode-abbrev.el on you emacs load-path
+;; 2. Place unicode-input.el on you emacs load-path
 ;;
 ;; 3. Compile the file (for speed)
-;; M-x byte-compile-file <location of haskell-unicode-abbrev.el>
+;; M-x byte-compile-file <location of unicode-input.el>
 ;;
 ;; 4. Add the following to your .emacs/init file
-;; (require 'haskell-unicode-abbrev)
+;; (require 'unicode-input)
 ;;
 ;; Usage:
+;;
 ;; (require 'haskell-mode)
 ;; (require 'unicode-input)
 
