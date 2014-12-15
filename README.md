@@ -1,3 +1,4 @@
+
 # unicode-input.el #
 
 This is an convinient unicode characters input package in Emacs. It can 
@@ -22,16 +23,17 @@ steps to add `unicode-input` to you `haskell-mode`:
 
 ```elisp
 (require 'haskell-mode)
-(require 'haskell-unicode-abbrev)
+(require 'unicode-input)
 
 (add-hook 'haskell-mode-hook
 	  (lambda ()
 	    (abbrev-mode 1)
-	    (enable-unicode-input "<f9>")))
+	    (unicode-input-mode 1)))
 ```
 
-One had better use some unbind key for prefix to avoid conflicit problem, 
-like `<f9>` in this example. 
+By default, the `unicode-input` mode use keybindings with prefix of `<f9>`,
+but you can change the prefix by set the variable `unicode-input-prefix`. But
+take care to use some key not defined for potential keybinding conflicits.
 
 ## Usage 
 
