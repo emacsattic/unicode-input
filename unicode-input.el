@@ -36,6 +36,12 @@
 ;; for convenient Greek letters replacement.  So you need to enable the
 ;; "abbrev-mode" in the mode hook. For this part, see the installation part
 ;; for details.
+;;
+;; The haskell unicode symbol mainly contains the unicode symbol defined in
+;; "Prelude.Unicode" in the base-unicode-symbol package, except the "÷", it
+;; seems to be an keyboard macro of Emacs. Need *TODO* solve the future. See
+;; <http://hackage.haskell.org/package/base-unicode-symbols-0.2.2.4/docs/\
+;; Prelude-Unicode.html> for details.
 
 
 ;;; Installation:
@@ -72,6 +78,26 @@
 ;;
 ;; For other unicode characters, just press <f9> and then press their ansi
 ;; plain counter-part, then unicode character will be inserted at the cursor.
+
+;; To enable base unicode syntax for you haskell program, you need to put 
+;; {-# LANGUAGE UnicodeSyntax #-} at the beginning of you program, and
+;; "import Prelude.Unicode" in you program. For the set related unicode symbols
+;; you may also need to "import Data.List.Unicode" into you program. A sample
+;; haskell program may look like the following
+
+;; {-# LANGUAGE UnicodeSyntax #-}
+;; import Prelude.Unicode
+;; import Data.List.Unicode
+
+;; myId ∷ a → a
+;; myId x = x
+
+;; dummyId ∷ a → a
+;; dummyId = myId ∘ myId
+
+;; dummyConcat ∷ [a] → [a] → [a]
+;; dummyConcat xs ys = xs ⧺ ys
+
 
 
 ;;; Code:
@@ -198,8 +224,9 @@
     (">="		"≥")
     ("/<"		"≮")
     ("/>"		"≯")
+    ("++"		"⧺")
     ;; Arithmetic
-    ("(/)"			"\")
+    ;;("(/)"			"÷")  ;; comment due to not work
     ("*"			"⋅")
     ("elem"			"∈")
     ("notElem"			"∉")
@@ -271,7 +298,7 @@
   "For unicode characters input. "
   nil
   :keymap (let ((map (make-keymap))
-		(uprefix "<f9> "))
+		(uprefix (concat unicode-input-prefix " ")))
 	    (progn
 	      (dolist (x *unicode-input-haskell-characters*)
 		(define-key map (kbd (concat unicode-input-prefix (car x)))
